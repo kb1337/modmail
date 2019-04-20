@@ -720,7 +720,7 @@ class ThreadManager(ThreadManagerABC):
         # if not role_names:
         #     embed.add_field(name='Mention', value=user.mention)
         # embed.add_field(name='Registered', value=created + days(created))
-        embed.description += f' was created {days(created)}'
+        embed.description += f' utworzony {days(created)}'
 
         footer = 'User ID: ' + str(user.id)
         embed.set_footer(text=footer)
@@ -730,7 +730,7 @@ class ThreadManager(ThreadManagerABC):
         if member:
             joined = str((time - member.joined_at).days)
             # embed.add_field(name='Joined', value=joined + days(joined))
-            embed.description += f', joined {days(joined)}'
+            embed.description += f', dołączył {days(joined)}'
 
             if member.nick:
                 embed.add_field(name='Nickname',
