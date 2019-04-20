@@ -138,7 +138,7 @@ class Thread(ThreadABC):
         # Once thread is ready, tell the recipient.
         thread_creation_response = self.bot.config.get(
             'thread_creation_response',
-            'The staff team will get back to you as soon as possible.'
+            'Postaramy się odpowiedzieć jak najszybciej.'
         )
 
         embed = discord.Embed(
