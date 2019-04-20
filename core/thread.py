@@ -149,7 +149,7 @@ class Thread(ThreadABC):
 
         footer = 'Your message has been sent'
         if not self.bot.config.get('disable_recipient_thread_close'):
-            footer = 'Kliknij w kłódkę aby zamknąć wątek'
+            footer = 'Aby zamknąć wątek kliknij w kłódkę'
 
         footer = self.bot.config.get('thread_creation_footer', footer)
         embed.set_footer(text=footer, icon_url=self.bot.guild.icon_url)
@@ -282,7 +282,7 @@ class Thread(ThreadABC):
             else:
                 message = self.bot.config.get(
                     'thread_close_response',
-                    '{closer.mention} zamknął/ęła.'
+                    '{closer.mention} zamknął/ęła wątek.'
                     )
             
         message = message.format(closer=closer, loglink=log_url, logkey=log_data['key'])
