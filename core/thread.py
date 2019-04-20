@@ -247,15 +247,15 @@ class Thread(ThreadABC):
             user = f'`{self.id}`'
         
         if self.id == closer.id:
-            _closer = 'the Recipient'
+            _closer = 'adresata'
         else:
             _closer = f'{closer} ({closer.id})'
 
         embed.title = user
 
-        event = 'Thread Closed as Scheduled' if scheduled else 'Thread Closed'
+        event = 'Zaplanowano zamknięcie wątka' if scheduled else 'Wątek zamknięty'
         # embed.set_author(name=f'Event: {event}', url=log_url)
-        embed.set_footer(text=f'{event} by {_closer}')
+        embed.set_footer(text=f'{event} przez {_closer}')
         embed.timestamp = datetime.utcnow()
 
         tasks = [
