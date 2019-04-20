@@ -153,7 +153,7 @@ class Thread(ThreadABC):
 
         footer = self.bot.config.get('thread_creation_footer', footer)
         embed.set_footer(text=footer, icon_url=self.bot.guild.icon_url)
-        embed.title = self.bot.config.get('thread_creation_title', 'Thread Created')
+        embed.title = self.bot.config.get('thread_creation_title', 'Wątek otwarty')
 
         if creator is None:
             msg = await recipient.send(embed=embed)
@@ -269,7 +269,7 @@ class Thread(ThreadABC):
 
         # Thread closed message
 
-        embed = discord.Embed(title=self.bot.config.get('thread_close_title', 'Thread Closed'),
+        embed = discord.Embed(title=self.bot.config.get('thread_close_title', 'Wątek zamknięty'),
                               color=discord.Color.red(),
                               timestamp=datetime.utcnow())
 
@@ -277,18 +277,18 @@ class Thread(ThreadABC):
             if self.id == closer.id:
                 message = self.bot.config.get(
                     'thread_self_close_response', 
-                    'You have closed this Modmail thread.'
+                    'Zamknąłeś wątek.'
                     )
             else:
                 message = self.bot.config.get(
                     'thread_close_response',
-                    '{closer.mention} has closed this Modmail thread.'
+                    '{closer.mention} zamknął/ęła.'
                     )
             
         message = message.format(closer=closer, loglink=log_url, logkey=log_data['key'])
 
         embed.description = message
-        footer = self.bot.config.get('thread_close_footer', 'Replying will create a new thread')
+        footer = self.bot.config.get('thread_close_footer', 'Odpowiadanie utworzy nowy wątek')
         embed.set_footer(text=footer,
                          icon_url=self.bot.guild.icon_url)
 
