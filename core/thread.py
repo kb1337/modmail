@@ -247,7 +247,7 @@ class Thread(ThreadABC):
             user = f'`{self.id}`'
         
         if self.id == closer.id:
-            _closer = 'adresata'
+            _closer = 'nadawcę'
         else:
             _closer = f'{closer} ({closer.id})'
 
@@ -529,7 +529,7 @@ class Thread(ThreadABC):
             # noinspection PyUnresolvedReferences,PyDunderSlots
             embed.color = discord.Color.blurple()  # pylint: disable=E0237
         else:
-            embed.set_footer(text=f'Recipient')
+            embed.set_footer(text=f'Nadawca')
             # noinspection PyUnresolvedReferences,PyDunderSlots
             embed.color = self.bot.recipient_color  # pylint: disable=E0237
 
