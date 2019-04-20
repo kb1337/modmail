@@ -138,7 +138,7 @@ class Thread(ThreadABC):
         # Once thread is ready, tell the recipient.
         thread_creation_response = self.bot.config.get(
             'thread_creation_response',
-            'Postaramy się odpowiedzieć jak najszybciej.'
+            'The staff team will get back to you as soon as possible.'
         )
 
         embed = discord.Embed(
@@ -149,11 +149,11 @@ class Thread(ThreadABC):
 
         footer = 'Your message has been sent'
         if not self.bot.config.get('disable_recipient_thread_close'):
-            footer = 'Aby zamknąć wątek kliknij w kłódkę'
+            footer = 'Click the lock to close the thread'
 
         footer = self.bot.config.get('thread_creation_footer', footer)
         embed.set_footer(text=footer, icon_url=self.bot.guild.icon_url)
-        embed.title = self.bot.config.get('thread_creation_title', 'Wątek otwarty')
+        embed.title = self.bot.config.get('thread_creation_title', 'Thread Created')
 
         if creator is None:
             msg = await recipient.send(embed=embed)
@@ -247,15 +247,15 @@ class Thread(ThreadABC):
             user = f'`{self.id}`'
         
         if self.id == closer.id:
-            _closer = 'nadawcę'
+            _closer = 'the Recipient'
         else:
             _closer = f'{closer} ({closer.id})'
 
         embed.title = user
 
-        event = 'Zaplanowano zamknięcie wątka' if scheduled else 'Wątek zamknięty'
+        event = 'Thread Closed as Scheduled' if scheduled else 'Thread Closed'
         # embed.set_author(name=f'Event: {event}', url=log_url)
-        embed.set_footer(text=f'{event} przez {_closer}')
+        embed.set_footer(text=f'{event} by {_closer}')
         embed.timestamp = datetime.utcnow()
 
         tasks = [
@@ -269,7 +269,7 @@ class Thread(ThreadABC):
 
         # Thread closed message
 
-        embed = discord.Embed(title=self.bot.config.get('thread_close_title', 'Wątek zamknięty'),
+        embed = discord.Embed(title=self.bot.config.get('thread_close_title', 'Thread Closed'),
                               color=discord.Color.red(),
                               timestamp=datetime.utcnow())
 
@@ -277,18 +277,18 @@ class Thread(ThreadABC):
             if self.id == closer.id:
                 message = self.bot.config.get(
                     'thread_self_close_response', 
-                    'Zamknąłeś wątek.'
+                    'You have closed this Modmail thread.'
                     )
             else:
                 message = self.bot.config.get(
                     'thread_close_response',
-                    '{closer.mention} zamknął/ęła wątek.'
+                    '{closer.mention} has closed this Modmail thread.'
                     )
             
         message = message.format(closer=closer, loglink=log_url, logkey=log_data['key'])
 
         embed.description = message
-        footer = self.bot.config.get('thread_close_footer', 'Odpowiadanie utworzy nowy wątek')
+        footer = self.bot.config.get('thread_close_footer', 'Replying will create a new thread')
         embed.set_footer(text=footer,
                          icon_url=self.bot.guild.icon_url)
 
@@ -529,7 +529,7 @@ class Thread(ThreadABC):
             # noinspection PyUnresolvedReferences,PyDunderSlots
             embed.color = discord.Color.blurple()  # pylint: disable=E0237
         else:
-            embed.set_footer(text=f'Nadawca')
+            embed.set_footer(text=f'Recipient')
             # noinspection PyUnresolvedReferences,PyDunderSlots
             embed.color = self.bot.recipient_color  # pylint: disable=E0237
 
